@@ -41,6 +41,7 @@ for tuple_data in my_dict.items():
 for key, value in my_dict.items():
     print(f'{key = } value before 100 - {100 - value}')
 
+print('---------------')
 spam = my_dict.popitem()
 print(f'{spam = }\t{my_dict=}')
 eggs = my_dict.popitem()
