@@ -18,7 +18,7 @@ def tabl_gen():
                     str+='\n'
             yield str
 
-for i, str in enumerate(tabl_gen(), start=1):
+for str in tabl_gen():
     print(f'{str}',end=' ')
 
 # # вариант 2

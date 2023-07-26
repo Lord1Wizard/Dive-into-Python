@@ -7,12 +7,11 @@
 #  хранятся в кортеже как значения второго ключа.
 
 
-
 # inp_str = input('Введите более 4 целых чисел, разделённых символом “/”: ').split('/')
 inp_str = '1/2/3/4/5/6/7/8/9'.split('/')
-my_dict1 = {inp_str[1]:inp_str[0],inp_str[2]:[inp_str[3:]]}
+my_dict1 = {inp_str[1]: inp_str[0], inp_str[2]: [inp_str[3:]]}
 print(my_dict1)
 
 # решение 2
 a, b, c, *d = input().split('/')
-print(result := {b: a, c:d})
+print(result := {b: a, c: d})
