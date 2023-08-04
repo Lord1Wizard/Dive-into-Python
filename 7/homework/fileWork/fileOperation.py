@@ -78,7 +78,7 @@ def rename_files(desired_file_name, length_sequence_number, source_extention, de
     os.chdir(PATH_TO_FILES)
     for cur_name in os.listdir():
         if cur_name.endswith(f'.{source_extention}'):
-            new_name = f'{cur_name[span[0]:span[1]]}{desired_file_name}{"0" * (length_sequence_number - len(str(count)))}{count}.{destination_extention}'
+            new_name = f'{cur_name.split(".")[0][span[0]:span[1]]}{desired_file_name}{"0" * (length_sequence_number - len(str(count)))}{count}.{destination_extention}'
             os.rename(cur_name, new_name)
             count += 1
 
