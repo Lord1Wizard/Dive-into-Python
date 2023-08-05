@@ -11,30 +11,30 @@
 # должны сохраняться.
 import json
 
-
 while True:
     try:
-        name, pers_id, level = input('Введите данные: ').split()
+        with open('my_file.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = {}
+    print(data)
+    try:
+        name, pers_id, level = input('Введите данные(Имя id уровень) через пробел: ').split()
     except ValueError:
         break
+    flag = True
     if not 0 < int(level) < 8:
-        print('Давай сначала')
+        print('Уровень от 1 до 7.Давай сначала')
         continue
-    with open('my_file.json','r',encoding='utf-8') as f:
-        try:
-            data = json.load(f)
-            print(data)
-        except Exception:
-            data = {}
-    with open('my_file.json', 'w', encoding='utf-8') as f:
-
-        if level not in data.keys():
-            data[level]={}
-            # dict_line = {pers_id: name}
-        data[level][pers_id] = [name]
-        # else:
-            # dict_line = {pers_id: name}
-            # data[level].append([dict_line])
-            # data[level][pers_id].append(name)
-        json.dump(data, f, ensure_ascii=False)
-
+    for lev in data.values():
+        for key in lev.keys():
+            if key == pers_id:
+                flag = False
+    if flag:
+        with open('my_file.json', 'w', encoding='utf-8') as f:
+            if level not in data.keys():
+                data[level] = {}
+            data[level][pers_id] = name
+            json.dump(data, f, indent=2, ensure_ascii=False)
+    else:
+        print('Такой id уже есть. Давай сначала')

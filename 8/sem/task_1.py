@@ -19,8 +19,8 @@ def file_transform_to_json(filename):
             if key.title() in dict_to_save.keys():
                 dict_to_save[key.title()].append(value)
             else:
-                dict_to_save[key.title()]= [value]
-        json.dump(dict_to_save, file_w, ensure_ascii=False)
+                dict_to_save[key.title()] = [value]
+        json.dump(dict_to_save, file_w, indent=2, ensure_ascii=False)
 
 
 

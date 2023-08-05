@@ -15,4 +15,4 @@ def name_gen(filename):
     with open(filename, 'a', encoding='utf-8') as f:
         f.write(''.join(s).title()+'\n')
 
-name_gen('name.txt')0
+name_gen('name.txt')
