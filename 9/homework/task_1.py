@@ -68,5 +68,5 @@ def find_root(a, b, c):
     else:
         return 'нет'
 
-# give_numbers()
+give_numbers()
 print(find_root(1, 2, -3))
