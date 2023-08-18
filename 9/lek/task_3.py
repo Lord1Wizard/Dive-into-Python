@@ -12,14 +12,13 @@ def main(func):
     return wrapper
 
 
+@main
 def factorial(n):
     f = 1
+    print(n)
     for i in range(2, n + 1):
         f *= i
     return f
 
 
-print(f'{factorial(100) = }')
-control = main(factorial)
-print(f'{control.__name__}')
-print(f'{control(100000) = }')
+print(f'{factorial(1000) = }')

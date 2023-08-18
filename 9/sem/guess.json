@@ -1,0 +1,7 @@
+{
+  "args: (4, 2)": "result: count be over",
+  "args: (4, 5)": "result: you won in 1 attempts",
+  "args: (4, 4)": "result: you won in 1 attempts",
+  "args: (6, 5)": "result: you won in 2 attempts",
+  "args: (2, 2)": "result: you won in 2 attempts"
+}

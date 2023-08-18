@@ -9,24 +9,30 @@
 # Имя файла должно совпадать с именем декорируемой
 # функции.
 import json
+import os
 
 
 def json_saver(func):
+    if os.path.isfile(f'{func.__name__}.json'):
+        with open(f'{func.__name__}.json', 'r', encoding='utf-8') as f_read:
+            my_dict = json.load(f_read)
+    else:
+        my_dict = {}
+
     def wrapper(*args, **kwargs):
-        with open(f'{func.__name__}.json', 'a') as file:
-            temp_dict = {'args': args}
-            temp_dict.update(kwargs)
-            result = func(*args, **kwargs)
-            temp_dict['result'] = result
-            json.dump(temp_dict, file, indent=3, ensure_ascii=False)
+        result = func(*args, **kwargs)
+        with open(f'{func.__name__}.json', 'w', encoding='utf-8') as f_write:
+            my_dict.update({'args: ' + str(args): 'result: ' + str(result)})
+            print(my_dict)
+            json.dump(my_dict, f_write, indent=2, ensure_ascii=False)
         return result
 
     return wrapper
 
 
 @json_saver
-def example(a, b, c='5'):
-    return max(a, b, c)
+def summa(a, b, c):
+    return a + b + c
 
 
-print(example(1, 2, 3))
+summa(1, 1, 3)
