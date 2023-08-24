@@ -1,0 +1,99 @@
+# Создайте класс Матрица. Добавьте методы для:
+# ○ вывода на печать,
+# ○ сравнения,
+# ○ сложения,
+# ○ *умножения матриц
+
+class Matrix:
+
+    def __init__(self, matr):
+        """Создание экземпляра матрицы если все строки матрицы одинаковой длинны, иначе ошибка"""
+        flag = True
+        lenght = len(matr[0])
+        for i in range(len(matr)):
+            if lenght != len(matr[i]):
+                flag = False
+        if flag:
+            self.matr = matr
+        else:
+            raise ValueError
+
+    def get_name(self):
+        print(self.__name__)
+        for i, j in globals().items():
+            if j is self:
+                return i
+    def __str__(self):
+        """Перевод матрицы в str для печати"""
+        rez = ''
+        for i in range(len(self.matr)):
+            for j in range(len(self.matr[i])):
+                rez +=f'{self.matr[i][j]}\t'
+            rez += f'\n'
+        return rez
+
+    def __eq__(self, other):
+        """Сравнение матриц. Если матрицы одинакового размера то они равны"""
+        if isinstance(other, Matrix):
+            return len(self.matr) == len(other.matr) and len(self.matr[0]) == len(other.matr[0])
+        else:
+            raise ValueError
+
+    def __add__(self, other):
+        """Сложение матриц"""
+        if isinstance(other, Matrix) and self == other:
+            rez = list()
+            for i in range(len(self.matr)):
+                temp = list()
+                for j in range(len(self.matr[0])):
+                    temp.append(self.matr[i][j] + other.matr[i][j])
+                rez.append(temp)
+            return Matrix(rez)
+        else:
+            raise ValueError
+
+    def __mul__(self, other):
+        """Умножение матриц"""
+        if isinstance(other, Matrix) and len(self.matr[0]) == len(other.matr):
+            rez = list()
+            for i in range(len(self.matr)):
+                temp = list()
+                for j in range(len(other.matr[0])):
+                    temp.append(0)
+                    for k in range(len(other.matr)):
+                        # resulted matrix
+                        temp[j] += self.matr[i][k] * other.matr[k][j]
+                rez.append(temp)
+            # print(rez)
+            return Matrix(rez)
+        else:
+            raise ValueError
+
+
+
+
+my_matrix_1 = [[1, 2, 4, 71],
+               [3, 4, 6, 1]]
+
+my_matrix_2 = [[1, 2, 4, 29],
+               [3, 4, 6, 1]]
+
+my_matrix_3 = [[1, 2, 4, 29],
+               [3, 4, 6, 1],
+               [3, 4, 6, 1],
+               [3, 4, 6, 1]]
+
+
+
+m1 = Matrix(my_matrix_1)
+m2 = Matrix(my_matrix_2)
+m3 = Matrix(my_matrix_3)
+print(f'm1\n{m1}')
+print(f'm2\n{m2}')
+print(f'm3\n{m3}')
+
+print(f'Сравнение матриц m1 и m2\n{m1 == m2}')
+m4 = m1 + m2
+print(f'Результат сложения матриц m1 и m2\n{m4}')
+m5 = m1 * m3
+print(f'Результат умножения матриц m1 и m3\n{m5}')

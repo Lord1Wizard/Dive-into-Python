@@ -1,9 +1,10 @@
 class Person:
     __max_up_ = 3
     _max_level = 80
+    level = 1
 
     def __init__(self, name, race='unknow', speed=100):
-        self.level = 1
+        # self.level = 1
         self.health = 100
         self.name = name
         self.race = race
@@ -62,6 +63,12 @@ p2 = Hero('archery', 'Вася', 'Человек', 120, left_hand='Стрела'
 print(f'{p1.name = }, {p1.race = }, {p1.level = }, {p1.health = }, {p1._Person__max_up_ = }')
 print(f'{p2.power = }, {p2.name = }, {p2.race = }, {p2.level = }, {p2.health = }, {p2._Person__max_up_ = }')
 
+Person.level = 100
+print('*************************')
+print(f'{Person._Person__max_up_ = }, {p1._Person__max_up_ = }, {p2._Person__max_up_ = }')
+print(f'{Person.level = }, {p1.level = }, {p2.level = }')
+
+
 p1.level_up()
 print(f'{p1.name = }, {p1.race = }, {p1.level = }, {p1.health = }, {p1._Person__max_up_ = }')
 print(f'{p2.name = }, {p2.race = }, {p2.level = }, {p2.health = }, {p2._Person__max_up_ = }')
@@ -75,7 +82,7 @@ print(f'{p1.name = }, {p1.race = }, {p1.level = }, {p1.health = }, {p1._Person__
 print(f'{p2.name = }, {p2.race = }, {p2.level = }, {p2.health = }, {p2._Person__max_up_ = }')
 
 Person.level = 100
-
+print('*************************')
 print(f'{Person._Person__max_up_ = }, {p1._Person__max_up_ = }, {p2._Person__max_up_ = }')
 print(f'{Person.level = }, {p1.level = }, {p2.level = }')
 
