@@ -12,7 +12,6 @@ class Range:
     def __set__(self, instance, value):
         self.validate(value)
         setattr(instance, self.param_name, value)
-        print(self, value)
     def __delete__(self, instance):
         raise AttributeError(f'Свойство "{self.param_name}" нельзя удалять')
 
