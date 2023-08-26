@@ -128,4 +128,3 @@ if __name__ == '__main__':
     print(s2)
     print(s2.calculate_lesson())
     print(s2.calculate_test('физика'))
-    Student.help
