@@ -1,16 +1,14 @@
+import json
+import logging
 import configargparse
+from bs4 import BeautifulSoup
 import asyncio
 import requests
-from bs4 import BeautifulSoup
-import logging
-import sys
-import json
-
 
 class ParseIni:
     def __init__(self):
         parser = configargparse.ArgParser()
-        parser.add_argument('-c, --config', required=True, is_config_file=True,
+        parser.add_argument('-c, --config', default='config.ini', required=False, is_config_file=True,
                             help='Path to file config.ini')
         parser.add_argument('--currency_source',
                             default='http://www.finmarket.ru/currency/USD/',
@@ -41,17 +39,14 @@ class Currency:
         self.loop = asyncio.get_event_loop()
 
     async def get_currency_price(self):
-        full_page = await self.loop.run_in_executor(None, requests.get,
-                                                    self.used_args.currency_source,
-                                                    {'headers': self.used_args.headers})
-
-        soup = BeautifulSoup(full_page.content, 'html.parser')
-        convert = soup.findAll("div", {"class": "valvalue"})
-        return convert[0].text
+        print('rrr')
+        return "24"
 
     async def check_currency(self):
         json_data = json.loads(self.used_args.log_config)
         logging.basicConfig(**json_data)
+        # logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", filename="logger1.log")
+        # logging.info(**json_data)
         logging.info(self.used_args.log_config)
         logging.info(type(self.used_args.log_config))
 
@@ -75,18 +70,7 @@ class Currency:
             starting_currency = currency
             logging.info(f'{starting_currency}')
 
-
-async def main():
-    while True:
-        try:
-            start: str = input("Enter command: ")
-            if start == "Currency":
-                await Currency().check_currency()
-            raise ValueError
-        except ValueError as err:
-            logging.error(err)
-            logging.error("Error! Try again?")
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+if __name__ =='__main__':
+    print(logging.INFO)
+    asyncio.run(Currency().check_currency())
+    # await Currency().check_currency()
