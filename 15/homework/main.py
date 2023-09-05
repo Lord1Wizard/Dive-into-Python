@@ -117,7 +117,7 @@ async def main():
         elif start == None:
             pass
         else:
-            print('Такой команды нет\nСписок команд:\nCurrency - запуск отслеживания курса валюты и логирования\nPrice - текущее значение курса\nExit -выход')
+            print('Такой команды нет\nСписок команд:\nCurrency - запуск отслеживания курса валюты и логирования\nPrice - текущее значение курса\nExit - выход')
         start = await waiting_input()
 
 
