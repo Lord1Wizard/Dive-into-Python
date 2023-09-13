@@ -53,13 +53,13 @@ class Currency:
         convert = soup.findAll("div", {"class": "valvalue"})
         return convert[0].text
 
-    async def check_currency(self,logger):
+    async def check_currency(self, logger):
         """Проверка изменения курса валюты и логирование"""
         while self.start_flag:
             currency = await self.get_currency_price()
             currency = float(currency.replace(",", "."))
             if self.starting_currency is None:
-                logger.warning("Start! Current currency value: %f",currency)
+                logger.warning("Start! Current currency value: %f", currency)
                 self.starting_currency = currency
             if currency >= self.starting_currency + float(
                     self.tracking_point):
@@ -101,6 +101,7 @@ async def main():
     logger.info(used_args.log_config)
     current_currency = Currency(used_args.currency_source, used_args.headers, used_args.tracking_point)
     start = None
+    temp = None
     while True:
         if start == "Currency":
             current_currency.start_flag = 1
@@ -111,13 +112,14 @@ async def main():
             current_currency.start_flag = 0
             try:
                 await temp
-            except :
-                print('Логирование не было запущено')
+            except Exception as e:
+                print('Логирование не было запущено', e)
             break
-        elif start == None:
+        elif start:
             pass
         else:
-            print('Такой команды нет\nСписок команд:\nCurrency - запуск отслеживания курса валюты и логирования\nPrice - текущее значение курса\nExit - выход')
+            print('Такой команды нет\nСписок команд:\nCurrency - запуск отслеживания курса валюты и логирования'
+                  '\nPrice - текущее значение курса\nExit - выход')
         start = await waiting_input()
 
 
